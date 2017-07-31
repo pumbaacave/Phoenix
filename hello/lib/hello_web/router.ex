@@ -19,10 +19,16 @@ defmodule HelloWeb.Router do
     get "/", PageController, :index
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
+    forward "/jobs", BackgroundJob.Plug
   end
 
+  scope "/admin", as: :admin do
+    resources "/reviews", HelloWeb.Admin.ReviewController
+  end
   # Other scopes may use custom stacks.
-  # scope "/api", HelloWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", HelloWeb do
+    pipe_through :api
+
+    resources "/reviews", ReviewController
+  end
 end
