@@ -21,6 +21,7 @@ defmodule HelloWeb.Router do
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
     forward "/jobs", BackgroundJob.Plug
+    resources "/users", UserController
   end
 
   scope "/admin", as: :admin do
