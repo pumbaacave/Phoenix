@@ -1,9 +1,12 @@
 <div class="jumbotron">
   <p><%= handler_info @conn %></p>
-
+  <!--%= for tuple <- connection_keys @conn do %-->
+  <h3> Keys for the assigns Map </h3>
+  <%= for item <- assigns do %>
+    <p><%=inspect item %></p>
+  <% end %>
   <h3> Keys for the conn Struct </h3>
-
-  <%= for tuple <- connection_keys @conn do %>
-    <p><%= inspect tuple %></p>
+  <%= for tuple <- connection_keys assigns.conn do %>
+    <p><%= render HelloWeb.SharedView, "key.html", tuple: tuple %></p>
   <% end %>
 </div>
