@@ -26,6 +26,12 @@ defmodule HelloWeb.Router do
                                               singleton: true
   end
 
+  scope "/cms", HelloWeb.CMS, as: :cms do
+    pipe_through [:browser, :authenticate_user]
+
+    resources "/pages", PageController
+  end
+  
   scope "/admin", as: :admin do
     resources "/reviews", HelloWeb.Admin.ReviewController
   end
